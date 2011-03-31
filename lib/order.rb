@@ -9,11 +9,14 @@ class Order
   end
     
   def valid_order?
-    if @order != [] do 
-    (@order - MENU) == []? true : false
-    else
-      false 
+    false unless @order.count > 0 
+  end
+    
+  def check_menu
+    (@order - MENU) == []? "Coming right up." : "#{(@order - MENU).to_s} is not on the menu, buddy."  
   end
 end
 
+jr = Order.new("hotdog")
 
+puts jr.check_menu
