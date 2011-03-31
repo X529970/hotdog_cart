@@ -9,7 +9,10 @@ class Order
   end
     
   def valid_order?
+    if @order != [] do 
     (@order - MENU) == []? true : false
+    else
+      false 
   end
 end
 
