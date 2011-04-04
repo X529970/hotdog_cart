@@ -1,22 +1,26 @@
 
 class Order
-  attr_accessor :order
+  attr_accessor :order, :items
   
-  MENU = ["hotdog","coke", "diet_coke"]
+  MENU = {:hotdog => 2.00, :coke => 1.00, :chips => 1.00}
   
-  def initialize(*order)
+  def initialize(*order) 
     @order = order
+    @items = []
   end
-    
+
+  def total_cost
+    items.inject(0) do |result, item|
+      result += item.quantity * MENU[item.name]
+    end  
+  end
+  
   def valid_order?
     false unless @order.count > 0 
   end
     
   def check_menu
-    (@order - MENU) == []? "Coming right up." : "#{(@order - MENU).to_s} is not on the menu, buddy."  
+    diff = self.items.collect {|i| i.name } - MENU.keys
+    diff == []? "Coming right up." : "#{diff.join(', ').capitalize} is not on the menu, buddy."  
   end
 end
-
-jr = Order.new("hotdog")
-
-puts jr.check_menu
