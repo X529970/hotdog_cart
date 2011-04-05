@@ -24,3 +24,7 @@ class Order
     diff == []? "Coming right up." : "#{diff.join(', ').capitalize} is not on the menu, buddy."  
   end
 end
+
+jeff = Order.new :hotdog => 2, :coke => 3
+
+puts jeff.total_cost
